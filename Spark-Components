@@ -1,0 +1,19 @@
+Compponents of Spark are
+  - Spark Core
+  - Spark Streaming
+  - MLLib
+  - Graphix
+  - Spark SQL
+  
+SparkCore:
+==========
+
+  ---  It contains basic functionality includes components for task scheduling, memory management, fault recovery , Interactivity with storage system etc.,
+  ---  it is home to the API that defines RDD's ( Resilient Distributed Dataset ) - Spark's main programming abstraction.
+  ---  RDD is collection of items distributed across many nodes that can be computed in parallel
+  ---  RDD contains partitions of data . ex: In case of HDFS, the blocks are nothing but partitions of RDD
+  
+  
+  
+
+   

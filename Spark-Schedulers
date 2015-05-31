@@ -1,0 +1,8 @@
+Spark has below 3 schedulers
+
+Standalone Scheduler ( default )
+YARN
+Mesos
+
+Standalone Scheduler:
+============================

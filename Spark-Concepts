@@ -18,3 +18,5 @@ Spark Shell:
 --- Spark comes with interactive shell which enables adhoc data analysis.
 --- Shell runs in local or in distributted mode
 --- Spark provides both python and scala shell
+
+

@@ -1,0 +1,11 @@
+This is Spark's operation which constructs  new RDD from previous one..
+
+action/s:
+========
+  a. This is also spark's operation which computes result on RDD and returns it to driver program or save it to external storage
+  b. Although, we can define RDD at any point of time, spark computes them only in lazy fashion
+  c. Spark RDD's are by default, re-computed each time when action on them.
+          LRU - Leat Recently Used machsnism
+  d. If we want to re-use RDD in multiple action, we can persist in using RDD.Persist or rdd.persist
+  e. By default, Spark stores RDD's content in memory partitined across cluster ( partitioned across machines and re-use them for future actions )
+  f. use persist to load subset data to memory and access it repeatedly..

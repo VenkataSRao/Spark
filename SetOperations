@@ -1,0 +1,7 @@
+Below are set operations used in spark
+
+distinct
+intersection
+subtract
+union
+cartesian

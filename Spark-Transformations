@@ -1,0 +1,8 @@
+Below are transformations
+
+map
+filter
+flatMap
+mapPartitions
+mapPartitionWithIndex
+sample

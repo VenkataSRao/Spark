@@ -1,0 +1,13 @@
+below transformations can apply on pair RDD's
+
+groupByKey
+reduceByKey
+mapValues
+flatMapValues
+keys
+values
+subtractByKey
+Join
+rightOuterJoin
+leftOuterJoin
+cogroup

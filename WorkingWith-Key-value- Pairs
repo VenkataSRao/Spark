@@ -1,0 +1,26 @@
+RDD's of key-value pairs are required for many operations in spark..
+These are commonly used to perform aggregations, ETL and gets data in key-value format
+
+RDD's of key-value pair are called pair RDD's.
+
+There are different ways to get pair RDD's
+
+(1) One way is to get Sequentia or HadoopFil which directly returns pair RDD
+
+  Ex: 
+  val brdd = sc.SequenceFile("/path",classof[text],classof[IntWritable]
+  rdd [(text,IntWritable)]
+  
+  
+  val bRDD = sc.Parallelize(Array(a,1),(b,2),(c,3)))
+  val frdd = bRDD.filter((x,y)=>y>2)
+  result = (c,3)
+  
+(2) we can have regular  RDD that can be turned into pair RDD..
+
+bRDD = sc.parallelize(Array("hi:1","hello:2","bye:3")
+
+Ex: val mRDD = bRDD.map(ele=> valParts=ele.split(":")
+  (parts[0],parts[1])
+  
+  

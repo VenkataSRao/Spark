@@ -44,7 +44,15 @@ Spark Installation:
    The above command creates jars for all spark subprojects.
 10) Once the steps 7 and 8 are done successfully, installation of spark is done.
 
+
 Start the spark daemons:
+============================
 spark-1.2.1$./sbin/start-all.sh
 This starts the spark daemons master and worker.
+
+Stop Spark daemons:
+===================
+spark-1.2.1$./sbin/stop-all.sh
+
+
 

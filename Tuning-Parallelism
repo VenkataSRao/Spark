@@ -1,0 +1,39 @@
+Importance of partitions tuning..
+(1). too few partitions:
+
+  less concurrency:
+  ===============
+  More susuptible to data skew.. increased memory pressure for groupByKey, reduceByKey,sortByKey etc.,
+  
+  (2).too-many partitions:
+  =========================
+  Wastage of cluster resources and time and it delays job exectution..
+  
+  Hence need resaonable amount of partitions..
+   
+  Few points to consider for developers:
+  =========================================
+  Ensure enough partitions for concurrency
+  Minimize memory consumption, especially group, sort on large keys/huge dataset
+  Minimize amount of data shuffled..
+  
+  
+  Memory Problems:
+  ====================
+  
+ (1) Symptoms: 
+ ===============
+  (a) bad performance
+  (b) Executor or machine failures ( this indicates too manfy shuffle files too )
+  
+(2) Diagnosis:
+======================
+    Set Spark executor, extra java options to include point garbage details.. + Heap dump out of memory error
+    
+(3) Resolution:
+================
+  (a) Increase Spark.executor.memory
+  (b) Increase number of partitions
+  (c) Re-evaluate program structure
+  
+  

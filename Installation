@@ -35,11 +35,13 @@ Spark Installation:
 
 5) cd spark-1.2.1
    vim conf/spark-env.sh
-   Now include SCALA_HOME, HADOOP_HOME, SPARK_MASTER_IP configuration parameters in spark-env.sh. Save and close the file
+   Now include SCALA_HOME, HADOOP_HOME, SPARK_MASTER_IP configuration parameters in spark-env.sh. 
+   Save and close the file
 6) Now open vim conf/slaves. In this file include hostnames of the worker nodes.
 7) Once the above steps 4 and 5 are done, change to spark home directory (i.e cd spark-1.2.1)
 8) spark-1.2.1$ sbt assembly
-   The above command compiles the source code file and downloads necessary dependencies. Access to internet with good speed is required for this.
+   The above command compiles the source code file and downloads necessary dependencies. 
+   Access to internet with good speed is required for this.
 9) spark-1.2.1$sbt package
    The above command creates jars for all spark subprojects.
 10) Once the steps 7 and 8 are done successfully, installation of spark is done.

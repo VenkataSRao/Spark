@@ -6,3 +6,6 @@ flatMap
 mapPartitions
 mapPartitionWithIndex
 sample
+aggregateByKey
+foldByKey
+coalesce

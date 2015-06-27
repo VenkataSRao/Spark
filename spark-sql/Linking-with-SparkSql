@@ -1,0 +1,17 @@
+SparkSql can be built with or without apache hive
+With support of hive, users can access hive tables, UDF's, SerDe's, HiveQl
+It is important that includes hive libraries and does not require hive installation
+
+
+Spark is downloaded in binary form, it is already built with hive support. but if it is built on source run below command
+  sbt -Phive assembly
+
+To link SparkSql with hive the library is spark-hive-2.1.0
+
+To linl SparkSql without hive, library is spark-sql-2.10
+
+To connect with existing hive installation to sparksql copy hive-site.xml to spark config directory( $SPARK_HOME/conf)
+
+If hive is not installed, sparksql will create its own metastore db in the programs working directory called metastore-db..
+
+Creating tables will be placed in /user/hive/warehouse or local file system or HDFS if hive-site.xml provided..

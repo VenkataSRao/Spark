@@ -1,0 +1,14 @@
+To use SparkSql, either create HiveContext on SQLContext based on SparkContext
+
+These HiveContext for SQLContext will provide additional functions for query and interacting with data..
+
+import.org.apache.spark.sql.SqlContext._
+import.org.apache.spark.sql.Hive.HiveContext._
+
+val sc = new SparkContext(conf)
+
+val sqlContext = new SqlContext(sc)
+val HiveContext = new HiveContext(sc)
+
+Specific variant of sql that is used for spark queries can also be selected using spark.sql.dialect option
+This parameter can changed using setConf method on sqlContext or SET key=value command in sql.

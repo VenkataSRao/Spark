@@ -1,0 +1,43 @@
+SchemaRDD is an RDD of row object, each representing a record.
+It is also known as schema of records
+It looks like a regular RDD but internally stores data in more efficient manner taking advantage of schema..
+They can be created from external sources from the results of query or from regular RDD's
+
+We can also operate on them using existing RDD transformation like map and filter..
+It also has capability to register any schema RDD as a temporary table  to query it using HiveContext.sql on SQLContext.sql
+These temporary tables are removed once the application exits..
+
+From Spark1.3, SchemaRDD is renamed to dataFrame which is conceptually equal to a table in relational databases or dataframe
+in R or python
+
+Ex:
+
+Conside below table
+
+Name  Age Marks
+A 29  100
+B 24  90
+C 39  89
+
+Sample sparkSql for the above prog looks like below
+
+object test
+{
+case class student ( Name:String, Age:int, marks:float)
+
+def main()
+
+{
+
+val sqlContext = new sqlContext(sc);
+val bRDD = sc.textFile("/locationof file")
+val SchemaRDD = bRDD.applySchema(student)
+
+val query = schemaRDD.sql("select name,age from student")
+
+
+}
+
+}
+
+

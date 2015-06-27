@@ -1,1 +1,12 @@
 1. SparkSql is Spark module for structured data processing..
+2. It provides programming abstract called data frames..
+3. Earlier than Spark1.3 it is called SparkRDD and also acts as distributed schema query engine.
+In particular SparkSql provides 3 main capabilities..
+
+  a. It can load data from variety of structured sources 
+    Ex: JSON, HIVE, parquet
+  b. It allows user to query data using sql. both inside a spark program and from external tools that connects to Sparksql
+     through standard database connections..( jdbc/odbc) such as BI tools as tableau..
+  c. SparkSql provides rich integration b/w sql and regular scala/java/python code, including ability to join RDD's and sql
+      tables, expose custom functions and more..
+      

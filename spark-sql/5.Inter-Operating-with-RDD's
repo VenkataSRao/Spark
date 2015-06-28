@@ -1,0 +1,26 @@
+There are two methos for converting existing RDD's into schemaRDD's/DataFrames.
+
+1st Method:
+=============
+Infer schema using reflection..
+  (a). First method uses reflection to infer schema of RDD that contains specific types of object. This method works well when
+      schema is already known while writing spark application.
+  (b). SparkSql has support for converting RDD contain case classes to a dataframe or schemaRDD
+  (c). Case class defines a schema of a table. the names of arguments in case class are read using reflection and these 
+       becomes names of the columns
+  (d). Case classes can also be nested or contain comples type such as sequences or arrays
+          Ex: case class student (Name:string,age:Int, marks:Float)
+              case class person ( st:student )
+              
+              Here person is nested.. with student class
+              
+         upon imposing schema of case class on regular RDD it can be implicitly converted to a dataframe/schemaRDD and then
+         registered as a table
+         
+  (e). Table can be used sub sequent sql statements..
+  
+  
+  2nd Method:
+  ===========
+  
+  

@@ -23,4 +23,15 @@ Infer schema using reflection..
   2nd Method:
   ===========
   
+  Programatically  specifying schema
+   
+    (a). When case classes can  not be defined ahead of time ( for instance structure of records encoded in a string )
+         or a data set will be passed and fields can be projected for differently for different users.
+    (b). A dataframe/schemaRDD can be created programatically as
+            - create RDD of rows from original RDD of row
+            - create schema represented by structType matching the structure of rows in the RDD created in Step1
+            - apply schema to the RDD's of rows via create dataframe( create dataframe/apply schema for schemaRDD ) method
+              provided by sqlcntext..
+          
+  
   

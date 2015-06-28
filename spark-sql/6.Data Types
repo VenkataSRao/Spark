@@ -1,1 +1,13 @@
-fsdd
+SparkSql supports following data types
+
+DataType in SparkSql      DataType in Scala
+====================      ==================
+
+ByteType                    Byte
+StringType                  String
+IntegerType                 Int
+FloatType                   Float
+ArrayType                   scala.collect.seq
+MapType                     scala.collect.map
+StructType                  org.apache.spark.seq.row (SparkSql API)
+struct field                struct field( fieldName, dataType, nullable)

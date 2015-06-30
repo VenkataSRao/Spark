@@ -1,0 +1,14 @@
+Spark's actions are
+
+reduce
+count
+collect
+first
+take(n)
+takeSample
+takeordered
+saveAsTextFile
+saveAsSequenceFile
+saveAsObjectFile
+foreach
+countByValue

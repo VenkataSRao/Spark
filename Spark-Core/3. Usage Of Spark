@@ -1,0 +1,14 @@
+Spark is used for data science and data processing applications.
+
+DataScience:
+============
+
+--- Machine Learning and data analysis supported through MLLib libraries
+--- There is also support for external programs in MATLAB or R
+--- Data frame is for data scientists
+
+Data Processing Applications:
+==================================
+
+--- Use principles of s/w engineering such as encapusaltion, inheritance,  interface design and object oriented principles to 
+build an applicaiton that process massive amount of data in parallel across cluster..

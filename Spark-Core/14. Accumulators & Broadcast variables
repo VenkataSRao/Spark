@@ -1,0 +1,22 @@
+Accumulators:
+==============
+
+When working with spark transformations, variable can define outside driver program, but each task running on the cluster
+gets new copy of the variable and updates from this copy or not propogated back to the driver..
+
+Accumulators are one type of shared variables which avoids above restrictions and aggregates information for worker nodes
+and back to the driver program..
+
+
+
+Broadcasr variables:
+=====================
+
+Spark's second type of shared variables allows program to efficiently send a large, read only value to all the worker nodes for
+use one or more spark operation..
+
+Broadcast variables are read only copy or used as a lookup table
+
+These varialbes are inefficient when
+  1. tasks launching mechanism is optimised for small task sizes will be overhead..
+  2. Using same varialbe in multiple parallel operaton, spark will send separately for each operation..

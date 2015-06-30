@@ -1,0 +1,51 @@
+This is simple program to read JSON file and display the results..
+this is with spark1.4.0
+
+Sample JSON File:
+=================
+
+{"name":"John", "address":{"city":"Bangalore","state":"Karnataka"}}
+{"name":"scott", "address":{"city":"Mumbai", "state":"Maha"}}
+
+======================
+
+Below is the code to read and display contents of above JSON file
+
+
+================================================
+
+package com.spark.demo
+
+import org.apache.spark.sql._
+import org.apache.spark.SparkConf
+import org.apache.spark.SparkContext
+
+
+object readjson {
+
+  
+   
+def main(args:Array[String])
+{
+  
+  val conf=new SparkConf
+  conf.setMaster("local")
+  conf.setAppName("sqlpractice")
+  val sc=new SparkContext(conf)
+  //val sqlcontxt=new SQLContext(sc)
+  
+  
+  val sqlContext = new org.apache.spark.sql.SQLContext(sc)
+
+  val df = sqlContext.read.json("path/to/file")
+  
+  df.registerTempTable("people")
+
+// Displays the content of the DataFrame to stdout
+  //df.printSchema() 
+  df.show()
+  df.printSchema()
+  df.select("name").show()
+
+  }
+}

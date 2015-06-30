@@ -1,5 +1,0 @@
-Storage Layers:
-
---- Spark can create distributed datasets fir any file stored in HDFS or other storage systems supported by support ed by hadoop API's (Cassandra, Hive, HBase )
---- Spark also suppots amazon S3
---- Spark does not require hadoop, but it require some storage..

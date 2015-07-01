@@ -1,0 +1,52 @@
+This is program executed with Spark1.4
+
+==========
+
+
+package com.spark.demo
+
+import org.apache.spark.SparkConf
+import org.apache.spark.SparkContext._
+import org.apache.spark._
+import org.apache.spark.api.java._
+import org.apache.hadoop.fs._
+import org.apache.hadoop.io._
+
+
+object PairRddTransformations  extends App {
+  
+    val conf = new SparkConf
+    conf.setMaster("local").setAppName("PairRddTransformations")
+    val sc = new SparkContext(conf)																																																																
+    val bRdd = sc.parallelize(Array(('a',10),('b',12),('b',14),('d',9),('d',10),('a',8)))
+    val bRdd2 = sc.parallelize(Array(('c',10),('a',15),('o',12)))
+    val bRdd3 = sc.parallelize(Array(('c',10),('e',15)))
+    val reduceByKeyRdd = bRdd.reduceByKey((x,y) => x+y)
+    val groupByKeyRdd = bRdd.groupByKey
+    val subtractByKeyRdd = bRdd.subtractByKey(bRdd2)
+    val cogroupedRdd = bRdd.cogroup(bRdd2)
+    val joinedRdd = bRdd.join(bRdd2)
+    val sortByKeyRdd = bRdd2.sortByKey()
+    val leftOuterJoinRdd = bRdd.leftOuterJoin(bRdd3)
+    val rightOuterJoinRdd = bRdd.rightOuterJoin(bRdd2)
+    val flatMapValuesRdd = bRdd2.flatMapValues(x=> 1 to 17)
+    val mapValuesRDD = bRdd.mapValues(x => x+1)
+    val keys = bRdd.keys
+    val values = bRdd.values
+    bRdd.coalesce(1, false)
+    
+    
+    // Actions
+    reduceByKeyRdd.foreach(println) 
+    groupByKeyRdd.foreach(println)
+    subtractByKeyRdd.foreach(println)
+    cogroupedRdd.foreach(println)
+    joinedRdd.foreach(println)
+    sortByKeyRdd.foreach(println)
+    leftOuterJoinRdd.foreach(println)
+    rightOuterJoinRdd.foreach(println)
+    mapValuesRDD.foreach(println)
+    flatMapValuesRdd.foreach(println)
+    val countByKeyRdd = bRdd.countByKey
+        
+  }

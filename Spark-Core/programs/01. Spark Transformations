@@ -1,0 +1,82 @@
+
+This programs coversall sprark transformations... this is executed with Spark1.4
+
+=============
+
+
+package com.spark.demo
+
+import org.apache.spark.SparkConf
+import org.apache.spark.SparkContext._
+import org.apache.spark._
+import org.apache.spark.api.java._
+import org.apache.hadoop.fs._
+import org.apache.hadoop.io._
+
+object SparkTransformations extends App {
+
+    
+      val conf = new SparkConf
+      conf.setMaster("local").setAppName("SparkTransformations")
+      val sc = new SparkContext(conf)
+      
+      val baseRdd1 = sc.parallelize(Array("hello","hi","John","big","data","team","team","hi"),1)
+      //val baseRdd2 = sc.textFile("hdfs://server:9000/data/fileanme")
+      val baseRdd2 = sc.parallelize(Array("hey", "ram","krish","tiger","hi"),1)
+      val baseRdd3 =  sc.parallelize(Array(1,2,3,4),2)
+          
+        
+      val sampledRdd = baseRdd1.sample(false,0.5)
+      //sampledRdd.foreach(println)
+      
+      // Set operations
+       val unionRdd = baseRdd1.union(baseRdd2).repartition(1)
+      //unionRdd.foreach(println)
+      
+
+      val intersectionRdd = baseRdd1.intersection(baseRdd2)
+      //intersectionRdd.foreach(println)
+      
+      val distinctRdd = baseRdd1.distinct.repartition(1)
+      //distinctRdd.foreach(println)
+      
+      val subtractRdd = baseRdd1.subtract(baseRdd2)
+      subtractRdd.foreach(println)
+      
+      val cartesianRdd = sampledRdd.cartesian(baseRdd2)
+      //cartesianRdd.foreach(println)
+      
+      //Actions
+      val reducedValue = baseRdd3.reduce((a,b) => a+b)
+      
+      val collectedRdd = distinctRdd.collect
+      //collectedRdd.foreach(println)
+      val count = distinctRdd.count
+      val first = distinctRdd.first
+      //println("Count is..."+count); 
+      //println("First Element is..."+first)
+      val takeValues = distinctRdd.take(3)
+      val takeSample = distinctRdd.takeSample(false, 2)
+      val takeOrdered = distinctRdd.takeOrdered(2)
+      //takeValues.foreach(println)
+      //println("Take Sample Values..")
+      //takeSample.foreach(println)
+      
+     // distinctRdd.saveAsObjectFile("hdfs://impetus-b0009:9000/object")
+      val foldResult = distinctRdd.fold("<>")((a,b) => a+b)
+     // println(foldResult)
+      val topValues = distinctRdd.top(2)
+      //topValues.foreach(println)
+      val countValue = baseRdd1.countByValue
+     // println(countValue)
+     val aggValue = baseRdd2.aggregate("x")((p,q)=>p+q,(m,n)=>m+n)
+    //println(aggValue)
+     
+    //baseRdd3.saveAsTextFile("hdfs://impetus-b0009:9000/output")
+
+      
+      //key-value based transformations
+      
+      
+    
+}

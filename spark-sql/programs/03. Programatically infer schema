@@ -1,0 +1,76 @@
+This code infers schema programatically
+
+sample text file..
+
+people.txt
+=========
+abc,12
+sby,39
+john,38
+jack,27
+jon,22
+tiger,49
+
+
+=================
+
+Program Code:
+=============
+
+package com.spark.demo
+
+import org.apache.spark.sql._
+import org.apache.spark.SparkConf
+import org.apache.spark.SparkContext
+
+
+
+
+object progmatically_infer_schema {
+  
+  def main (args:Array[String]){
+    
+    val conf=new SparkConf
+    conf.setMaster("local")
+    conf.setAppName("progmatically_infer_schema")
+    val sc=new SparkContext(conf)
+    
+    val sqlContext = new org.apache.spark.sql.SQLContext(sc)
+    
+    val people = sc.textFile("/opt/venkata_practice/people.txt")
+    
+    val schemaString = "name age"
+      
+     import org.apache.spark.sql.Row;
+    
+    import org.apache.spark.sql.types.{StructType,StructField,StringType};
+    
+    val schema =  StructType( schemaString.split(" ").map(fieldName => StructField(fieldName, StringType, true)))
+    
+    val rowRDD = people.map(_.split(",")).map(p => Row(p(0), p(1).trim))
+    
+    val peopleDataFrame = sqlContext.createDataFrame(rowRDD, schema)
+
+    peopleDataFrame.registerTempTable("people")
+    
+    val results = sqlContext.sql("SELECT name FROM people")
+    
+    results.map(t => "Name: " + t(0)).collect().foreach(println)
+    
+  } 
+
+}
+
+
+
+Output:
+===========
+
+Name: abc
+Name: sby
+Name: john
+Name: jack
+Name: jon
+Name: tiger
+
+

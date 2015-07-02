@@ -1,0 +1,320 @@
+Here, creating a case class as Record it simply gives number and its value..
+and also read parquet file and display results.
+
+
+[1,val_1]
+[2,val_2]
+[3,val_3]
+
+
+
+Program Code:
+=============
+
+package com.spark.demo
+
+import org.apache.spark.sql._
+import org.apache.spark.SparkConf
+import org.apache.spark.SparkContext
+import org.apache.spark.sql.functions._
+
+case class Record(key: Int, value: String)
+
+object RDDRelation {
+  
+  def main(args:Array[String]){
+    
+     val conf=new SparkConf
+    conf.setMaster("local")
+    conf.setAppName("RDDRelation")
+    val sc=new SparkContext(conf)
+     
+     val sqlContext = new org.apache.spark.sql.SQLContext(sc)
+     
+     import sqlContext.implicits._
+     
+     val df = sc.parallelize((1 to 100).map(i => Record(i, s"val_$i"))).toDF()
+     
+     df.registerTempTable("records")
+     
+     println("Result of SELECT *:")
+    sqlContext.sql("SELECT * FROM records").collect().foreach(println)
+    
+    //Aggregation query
+    
+    val count = sqlContext.sql("SELECT COUNT(*) FROM records").collect().head.getLong(0)
+    println(s"COUNT(*): $count")
+    
+    
+    val rddFromSql = sqlContext.sql("SELECT key, value FROM records WHERE key < 10")
+
+    println("Result of RDD.map:")
+    rddFromSql.map(row => s"Key: ${row(0)}, Value: ${row(1)}").collect().foreach(println)
+    
+    
+    
+    df.where($"key" === 1).orderBy($"value".asc).select($"key").collect().foreach(println)
+    
+    df.write.parquet("pair.parquet")
+    
+    val parquetFile = sqlContext.read.parquet("pair.parquet")
+    
+     parquetFile.where($"key" === 1).select($"value".as("a")).collect().foreach(println)
+     
+    
+     parquetFile.registerTempTable("parquetFile")
+    sqlContext.sql("SELECT * FROM parquetFile").collect().foreach(println)
+
+    sc.stop()
+  }
+
+}
+
+
+Output:
+========
+
+1st Output
+
+Result of SELECT *:
+[1,val_1]
+[2,val_2]
+[3,val_3]
+[4,val_4]
+[5,val_5]
+[6,val_6]
+[7,val_7]
+[8,val_8]
+[9,val_9]
+[10,val_10]
+[11,val_11]
+[12,val_12]
+[13,val_13]
+[14,val_14]
+[15,val_15]
+[16,val_16]
+[17,val_17]
+[18,val_18]
+[19,val_19]
+[20,val_20]
+[21,val_21]
+[22,val_22]
+[23,val_23]
+[24,val_24]
+[25,val_25]
+[26,val_26]
+[27,val_27]
+[28,val_28]
+[29,val_29]
+[30,val_30]
+[31,val_31]
+[32,val_32]
+[33,val_33]
+[34,val_34]
+[35,val_35]
+[36,val_36]
+[37,val_37]
+[38,val_38]
+[39,val_39]
+[40,val_40]
+[41,val_41]
+[42,val_42]
+[43,val_43]
+[44,val_44]
+[45,val_45]
+[46,val_46]
+[47,val_47]
+[48,val_48]
+[49,val_49]
+[50,val_50]
+[51,val_51]
+[52,val_52]
+[53,val_53]
+[54,val_54]
+[55,val_55]
+[56,val_56]
+[57,val_57]
+[58,val_58]
+[59,val_59]
+[60,val_60]
+[61,val_61]
+[62,val_62]
+[63,val_63]
+[64,val_64]
+[65,val_65]
+[66,val_66]
+[67,val_67]
+[68,val_68]
+[69,val_69]
+[70,val_70]
+[71,val_71]
+[72,val_72]
+[73,val_73]
+[74,val_74]
+[75,val_75]
+[76,val_76]
+[77,val_77]
+[78,val_78]
+[79,val_79]
+[80,val_80]
+[81,val_81]
+[82,val_82]
+[83,val_83]
+[84,val_84]
+[85,val_85]
+[86,val_86]
+[87,val_87]
+[88,val_88]
+[89,val_89]
+[90,val_90]
+[91,val_91]
+[92,val_92]
+[93,val_93]
+[94,val_94]
+[95,val_95]
+[96,val_96]
+[97,val_97]
+[98,val_98]
+[99,val_99]
+[100,val_100]
+
+
+2nd output:
+========
+
+COUNT(*): 100
+
+
+3rd output:
+===========
+
+Result of RDD.map:
+
+Key: 1, Value: val_1
+Key: 2, Value: val_2
+Key: 3, Value: val_3
+Key: 4, Value: val_4
+Key: 5, Value: val_5
+Key: 6, Value: val_6
+Key: 7, Value: val_7
+Key: 8, Value: val_8
+Key: 9, Value: val_9
+
+
+4th output:
+===========
+
+[1]
+
+5th output:
+==========
+
+[val_1]
+
+6th output:
+==========
+
+[1,val_1]
+[2,val_2]
+[3,val_3]
+[4,val_4]
+[5,val_5]
+[6,val_6]
+[7,val_7]
+[8,val_8]
+[9,val_9]
+[10,val_10]
+[11,val_11]
+[12,val_12]
+[13,val_13]
+[14,val_14]
+[15,val_15]
+[16,val_16]
+[17,val_17]
+[18,val_18]
+[19,val_19]
+[20,val_20]
+[21,val_21]
+[22,val_22]
+[23,val_23]
+[24,val_24]
+[25,val_25]
+[26,val_26]
+[27,val_27]
+[28,val_28]
+[29,val_29]
+[30,val_30]
+[31,val_31]
+[32,val_32]
+[33,val_33]
+[34,val_34]
+[35,val_35]
+[36,val_36]
+[37,val_37]
+[38,val_38]
+[39,val_39]
+[40,val_40]
+[41,val_41]
+[42,val_42]
+[43,val_43]
+[44,val_44]
+[45,val_45]
+[46,val_46]
+[47,val_47]
+[48,val_48]
+[49,val_49]
+[50,val_50]
+[51,val_51]
+[52,val_52]
+[53,val_53]
+[54,val_54]
+[55,val_55]
+[56,val_56]
+[57,val_57]
+[58,val_58]
+[59,val_59]
+[60,val_60]
+[61,val_61]
+[62,val_62]
+[63,val_63]
+[64,val_64]
+[65,val_65]
+[66,val_66]
+[67,val_67]
+[68,val_68]
+[69,val_69]
+[70,val_70]
+[71,val_71]
+[72,val_72]
+[73,val_73]
+[74,val_74]
+[75,val_75]
+[76,val_76]
+[77,val_77]
+[78,val_78]
+[79,val_79]
+[80,val_80]
+[81,val_81]
+[82,val_82]
+[83,val_83]
+[84,val_84]
+[85,val_85]
+[86,val_86]
+[87,val_87]
+[88,val_88]
+[89,val_89]
+[90,val_90]
+[91,val_91]
+[92,val_92]
+[93,val_93]
+[94,val_94]
+[95,val_95]
+[96,val_96]
+[97,val_97]
+[98,val_98]
+[99,val_99]
+[100,val_100]
+
+
+
+

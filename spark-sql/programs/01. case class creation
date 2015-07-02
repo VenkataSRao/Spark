@@ -1,0 +1,47 @@
+Here, Creating a case class for people..
+
+
+
+people.txt
+=========
+
+name,age
+abc,12
+sby,39
+john,38
+jack,27
+jon,22
+tiger,49
+
+================
+
+package com.spark.demo
+
+
+
+import org.apache.spark.sql._
+import org.apache.spark.SparkConf
+import org.apache.spark.SparkContext
+
+case class Person(name: String, age: Int)  ========> case class
+
+object caseclass {
+  
+  def main (args:Array[String]){
+    
+    val conf=new SparkConf
+    conf.setMaster("local")
+    conf.setAppName("caseclass")
+    val sc=new SparkContext(conf)
+    
+    val sqlContext = new org.apache.spark.sql.SQLContext(sc)
+    
+    import sqlContext.implicits._
+    
+    
+  }
+
+}
+
+
+Note: program is not complete... this shows only case class definition..

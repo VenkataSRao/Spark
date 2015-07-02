@@ -3,7 +3,6 @@ for this program below is the sample file..
 
 file name: people.txt
 ====================
-name,age
 abc,12
 sby,39
 john,38
@@ -57,3 +56,32 @@ object caseclass {
   }
 
 }
+
+
+Output:
+=========
+User will get 3 outputs for the above program
+
+1st output:
+=========
+Name: sby
+Name: john
+Name: jack
+Name: jon
+
+2nd Ouptut:
+==========
+Name: sby
+Name: john
+Name: jack
+Name: jon
+
+3rd Ouptut:
+==========
+
+Map(name -> sby, age -> 39)
+Map(name -> john, age -> 38)
+Map(name -> jack, age -> 27)
+Map(name -> jon, age -> 22)
+
+

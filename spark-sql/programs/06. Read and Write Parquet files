@@ -1,0 +1,39 @@
+this program will read parquet file and write to another parquet file..
+
+
+Code:
+======
+
+package com.spark.demo
+
+import org.apache.spark.sql._
+import org.apache.spark.SparkConf
+import org.apache.spark.SparkContext
+
+
+object readnwrite {
+  
+  def main (args:Array[String]){
+    
+     val conf=new SparkConf
+    conf.setMaster("local")
+    conf.setAppName("caseclass")
+    val sc=new SparkContext(conf)
+     
+     val sqlContext = new org.apache.spark.sql.SQLContext(sc)
+
+     val df = sqlContext.read.load("/opt/venkata_practice/users.parquet")
+     df.select("name", "favorite_color").write.save("/opt/venkata_practice/users_new.parquet")
+
+
+       
+    
+  }
+
+}
+
+
+Output:
+=========
+
+User can found users_new.parquet file in the mentioned location

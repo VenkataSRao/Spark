@@ -1,0 +1,19 @@
+1. Spark Streaming is an extension to spark core API which is fault tolerant streaming process. Provides high throughput
+    and scalability.
+    
+2. Supported sources are
+    kafka
+    flume
+    twitter
+    zeroMQ
+    tcp sockets etc.,
+    
+    
+3. Complex algorithms can be expressed with high level functions like map,reduce, join and window
+
+4. Spark's MachineLearning, graph processing could be applied on live streaming data..
+
+
+In Spark Streamning.. RDD is called as Dstream
+
+    Dstream-----> Descritized stream

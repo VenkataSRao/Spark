@@ -6,10 +6,13 @@ If not available use below command to install
 
 yum install nc.x86_64
 
-nc is used to send data to 
+nc is used to send data to server.. In this example am using port 9999.. so nc will send data to port 9999
+
+what ever data user sends through nc.. this program code will give word count 
 
 
-
+Program Code:
+=============
 
 
 package com.spark.demo

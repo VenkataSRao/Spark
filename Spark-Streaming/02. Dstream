@@ -1,0 +1,14 @@
+1. Dstream or descritized stream represents continuous stream of data
+
+2. This can be created either from sources such as kafka,flume, HDFS or by applying operations on other Dstreams
+
+3. Dstream is a sequence of RDD
+
+4. Upon applying transformations, input Dstream and output operations write data to an external system
+
+5. Dstream provides many of operations available on RDD's and in addition operations related to time such as sliding window
+
+6. To start receiving data, explicitly invokde start on streaming context
+      ssc.start
+      
+7. Spark streaming will schedule streaming job on underlined spark context.

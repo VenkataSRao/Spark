@@ -1,0 +1,18 @@
+
+
+I/P Stream ----> SparkStreaming ---> Results pushed to external System
+
+a. spark streaming uses micro batch architecture where streams computation is a continuous series of batch computation on 
+    small batch of data
+    
+b. Data from various import sources is grouped into small batches. These batches are created at regular interval of time
+
+c. size of interval detained by batch interval .. this interval is typically b/w 500ms to serveral seconds configured by
+    the developer
+     
+d. Each input batch forms an RDD and is processed using spark jobs to create other RDD
+
+e. RDD is one time slice of data input stream
+
+f. processed resuls are pushed to external systems in batches..
+

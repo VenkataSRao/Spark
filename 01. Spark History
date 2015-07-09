@@ -5,3 +5,11 @@ In February 2014, Spark became an Apache Top-Level Project.
 
 In November 2014, the engineering team at Databricks used Spark and set a new world record in large scale sorting
 
+
+The Spark project consists of multiple components.
+
+ a. Spark Core and Resilient Distributed Datasets (RDDs)
+ b. Spark SQL
+ c. Spark Streaming
+ d. MLlib
+ e. Graphx

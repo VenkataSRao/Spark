@@ -1,0 +1,7 @@
+Spark was initially started by Matei Zaharia at UC Berkeley AMPLab in 2009, and open sourced in 2010 under a BSD license.
+
+In 2013, the project was donated to the Apache Software Foundation and switched its license to Apache 2.0. 
+In February 2014, Spark became an Apache Top-Level Project.
+
+In November 2014, the engineering team at Databricks used Spark and set a new world record in large scale sorting
+

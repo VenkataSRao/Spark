@@ -16,3 +16,22 @@ e. RDD is one time slice of data input stream
 
 f. processed resuls are pushed to external systems in batches..
 
+
+
+Some Points abt Streaming context:
+===================================== 
+
+After ssc context object is created perform following steps in the program
+
+    a. Define input sources by creating  input Dstream
+    b. Define streaming computations by applying transformations and output operations to Dstream
+    c. Start processing by streaming context
+                ssc.start
+    d. processing can be stopped as
+            streamingContext.stop
+            
+        Only one ssc will be active in jvm
+    e. Once the context has started, no new streaming computation can not be added 
+    f. Once SparkContext is available re-use it to create streamingcontext with previous one is stopped..
+    
+

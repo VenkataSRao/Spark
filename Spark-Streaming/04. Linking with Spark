@@ -1,0 +1,8 @@
+For ingesting data from sources like kafka, flume, twitter, ZeroMQ add following dependencies to the project
+
+  spark-streaming-kafka-2.10
+  spark-streaming-flume-2.10
+  spark-streaming-twitter-2.10
+  spark-streaming-zeroMQ-2.10
+  
+  etc.,,

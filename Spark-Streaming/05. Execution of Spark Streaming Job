@@ -1,0 +1,14 @@
+For each input source, spark streming launches receivers which are long running tasks within application execution collect
+data from input and save it as RDD's
+
+These receives input data and replicates to another executor for fault tolerance.. This RDD is stored in-memory as cached RDD
+
+Streaming offers same fault tolerance for Dstreams, as  sprak does for RDD's ie recompute the last data by using lineage of
+RDD's
+
+By default data replicates across 2 nodes hence it can tolerate single worker failures
+
+As re-computation using lineage takes long time there is mechanism called check pointing that saves state periodically teo
+reliable file system
+
+Using check pointing is set for 10 batches of data, hence receiving last data streaming read for last check point..

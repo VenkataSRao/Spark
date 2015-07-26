@@ -1,0 +1,78 @@
+Read parallelism:
+=================
+
+
+As kafka stores data in topics, if each topic has N partitions, then the application can only consume this topic with a maximum 
+of N threads in parallel. 
+The application is “consumer group” in kafka's terminology. The consumer group identified by string is the identifier for logical
+consumer application. 
+From a given Kafka topic, maximum of N threads across all the consumers in the same group read from the topic. Any excess threads
+will be idle.
+
+Note: 
+=======
+Multiple, independent logical consumer applications can consume against the same Kafka topic. In this case, each application will
+run its consumer threads under a unique consumer id.
+
+Example: 
+=========
+Suppose that kafka topic has 10 partitions. If the consumer group starts consuming with 1 thread, single thread will read from 
+all the 10 partitions. If we increase the number of threads from 1 to 14, 10 cosume from 10 partitions (each thread consumes from 
+each partition) and the remaining 4 threads will be idle.
+
+The read-parallelism in Spark can be achieved in 2 ways-
+
+Number of input DStreams: 
+==========================
+As spark will run one receiver per input Dstream, using multiple Dstreams will parallelize the read operations across multiple
+cores (this mostly happens across machines).
+Number of Consumer threads per Input Dstream:
+============================================
+In this case, same receiver will run multiple threads. The read opearation might happen in parallel but on the same 
+core/machine.
+
+Among the 2 ways discussed, first method is preferred as it gurantees launching threads on multiple machines. In case-2, 
+the threads would be launched in the same machine and also they would be competing for lock to push data into so-called blocks
+
+
+Examples:
+========
+
+Option1: Controlling the number of input Dstreams:
+
+val ssc: StreamingContext = ??? // ignore for now
+val kafkaParams: Map[String, String] = Map("group.id" -> "terran", /* ignore rest */)
+val numInputDStreams = 5
+val kafkaDStreams = (1 to numInputDStreams).map ( ele=> KafkaUtils.createStream(zkquorum,kafkaparams,kafkatopic) )
+
+zk quorum = IP address of zookeepr
+kafkatopic = topic to read
+kafka params = consumer group in app
+
+In the above example, we created 5 input Dstreams and these would run on machines (possible if the cluster size is five). 
+If the Kakfka topic has 5 partitions of data, each Dstream reads each partition at a time.
+
+Option2: 
+=========
+
+Controlling the number of consumer threads per input Dstream:
+val ssc: StreamingContext = ??? // ignore for now
+val kafkaParams: Map[String, String] = Map("group.id" -> "terran", ...)
+val consumerThreadsPerInputDstream = 3
+val topics = Map("zerg.hydra" -> consumerThreadsPerInputDstream)
+val stream = KafkaUtils.createStream(ssc, kafkaParams, topics, ...)
+
+In the above example, we created a single Dstream which is configured to run three consumer threads in the same receiver/task and hence on the same core/machine.
+
+Combining Options 1 and 2:
+=====================================
+val ssc: StreamingContext = ???
+val kafkaParams: Map[String, String] = Map("group.id" -> "terran", ...)
+val numDStreams = 5 val topics = Map("zerg.hydra" -> 1)
+val kafkaDStreams = (1 to numDStreams).map { _ => KafkaUtils.createStream(ssc, kafkaParams, topics, ...) }
+
+
+
+
+
+

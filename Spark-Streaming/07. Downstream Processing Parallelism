@@ -1,0 +1,31 @@
+Downstream processing parallelism in Streaming:
+================================================
+Spark ties the parallelism to the number of (RDD) partitions by running one task per RDD partition. Once the streaming application
+receives input data, the processing is identical to non-streaming spark applications.
+Number of pratitions of RDDs created by the input Dstreams: The input Dstream stores the individual messages into so called blocks. 
+A new block is generated every spark.streaming.blockInterval milliseconds and each block is truned into a partition of RDD that 
+will eventually created by the Dstream.
+
+Number of partitions created by input Dstream = batchInterval/spark.streaming.blockInterval
+
+batchInterval is the time interval at which streaming data will be divided into batches.
+
+2 ways to achieve processing parallelism:
+============================================
+
+Increase Number of input Dstreams
+==========================================
+Number of partitions of RDDs created by input Dstreams.
+
+Reaprtition Dstream:
+=====================
+This returns a new Dstream with an increased or decreased level N of parallelism. Each RDD has exactly N partitions.Dstreams are 
+series of continuous RDDs. Dstream.repartition calls RDD.repartition. This re-shuffles the data either to create more or fewer 
+partitions.
+
+Repartition allows to set the number of processing tasks and the number of cores that will be used for the processing.
+
+Union:
+========
+This is a transformation on Dstream. Union of 3 rdds with each 10 partitions each will create single RDD but it will contain 
+30 partitions.

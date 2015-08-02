@@ -1,0 +1,4 @@
+Machine Learning algorithms provided by MLlib can be applied on streaming of data
+
+either algorithm can be learned from streaming data and model can be applied on streaming data or otherwise model can be
+trained offline using history data and now trained model can be applied on streaming data

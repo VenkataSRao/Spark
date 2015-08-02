@@ -20,5 +20,66 @@ Also these transformations can combine, data from multiple Dstreams, within each
 Stateful Transformations:
 ============================
 
+These transformations use data or intermediate results from previous batches to compute the result of these are based on sliding
+windows, and on tracking state across time.
+
+There are 2 types of stateful transformations
+
+1. windowed operations and update state by key.
+
+Which tracks the state across events for each key.
+
+
+Windowed length if it is 3:
+
+3 batches are processed at once and after 2 secs the window wll slide
+
+r1 r2 r3 r4 r5 r6 (window processes and slides now)
+
+r1 r2 r3 r4 r5 r6
+
+r1 r2 r3 are made as one batch.
+
+After 2 secs, r3 r4 r5 are made as one batch
+
+Window Duration:
+===============
+
+This decides the number of previous bratches of data to be considered..
+
+Sliding duration:
+=================
+this is by default equal batch interval.
+
+And controls how frequently the new Dstream computes results.
+
+The windo operations returns a new Dstream with data for the requested window.
+
+Each RDD in the resultant Dstream, from the window contains data in the multiple batches.
+
+
+
+Update key by transformations:
+===========================================
+These operation provides access to state variables, for Dstreams of key value pairs,
+
+if we have Dstreams of key value pairs, we can construct a new Dstream of key,state pairs by using a function, that specifies,
+how to update the state for each key given new values.
+
+Ex: In a web server log, lets have the data of type user id and events.
+
+Here key is the userid and event is the value.
+
+Using update stateby key, we can track the last 10 pages each user visited. This list of pages will be the state object and 
+update it as each event arrives.
+
+update(events,oldstate)
+
+Output operations:
+===================
+streaming supports all output operations like batch processing.
+
+Save operations in Dstreams, Takes a directory to save files, and each batch is saved as sub directory in given directory.
+
 
 

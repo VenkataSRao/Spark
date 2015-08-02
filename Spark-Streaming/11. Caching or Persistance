@@ -1,0 +1,7 @@
+As in Spark batch processing streaming data can also be persistant eight in memory or in disk
+In case of stateful operations, data is by default persisted in memory..
+
+When using sources such as kafka, flume, socket etc., default persistance level is set to replicate data to two nodes for fault
+tolerance.. this default persistanct level keeps data in serialized format in memory
+
+* Window is stateful transformation

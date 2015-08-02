@@ -1,0 +1,9 @@
+With availability of dataframes or schema RDD's sql operations can be easily on streaming data.. As dstream us continuous
+series of RDD sql operations are performed by converting each RDD into a dataframe or schemaRDD which is registered as a
+temp table..
+
+Note:
+
+When running sql query on streaming data the query takes 5 mins to execute, call streamingContext.. remember (minute(5))
+so the data will be retained for the specified time. otherwise old streaming data might be discarded before the query can
+complete ..

@@ -1,0 +1,28 @@
+As streaming application runs continuously( 24X7 ) it must be resillient to failures irrespective of the application logic
+Hence spark straming needs to check point necessary information to a fault tolerant storage system( HDFS)
+so that it can recover from failures..
+
+There are 2 types of check pointing
+
+Metadata Check Pointing:
+=======================
+    In this mechanism, the information whic defines streaming computation is saved in storage like HDFS
+    Metadata includes 
+      . Configuration - which is used to create streaming application
+      . DStream opearations - The set of dstream operations that defines that streaming applications
+      . Incomplete batches -  batches whose jobs are queued but have not completed yet.
+      
+Data Check Points:
+==================
+
+      This saves generated RDD's to realiable storage
+      
+      This is necessary in stateful transformations as combined data in across multiple batches.
+      
+      In such transformations, generated RDD depend on RDD's of previous batches, which caused the length of dependency chanin
+      to increase with time.
+      
+      Hence intermediate RDD's of statefule transformations are periodically check pointed to reliable storage (HDFS), which 
+      removes dependency chain.
+      
+      

@@ -1,0 +1,24 @@
+Transformations on dstreans are either stateless or stateful
+
+Stateless Transformations:
+=========================
+
+In stateless transformations processing of each batch doesnot depend on the data of the previous batch.
+
+[rdd-rdd1-rdd2----] rdd2 is not dependent on rdd1.
+
+These are common transformations like map filter reduce by key, flat map, repartition, group by key,union, count, reduce, 
+count by value, join,co group.
+
+although this transformations seen to be applied on dstream, they will be applied separately, to each RDD, within Dstream. 
+For example, reduce by key reduces, data within each time step, but not across time steps.
+
+Also these transformations can combine, data from multiple Dstreams, within each time step. 
+
+
+
+Stateful Transformations:
+============================
+
+
+

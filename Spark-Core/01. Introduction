@@ -1,1 +1,11 @@
-Spark is a distributed in-memory cluster computing framework
+Apache Spark is an open-source cluster computing framework originally developed in the AMPLab at UC Berkeley.
+
+Spark requires a cluster manager and a distributed storage system.
+
+Spark consists of multiple components
+
+Spark Core
+Spark SQL
+Spark Streaming
+MLlib
+GraphX

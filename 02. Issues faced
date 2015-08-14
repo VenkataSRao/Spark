@@ -1,1 +1,19 @@
-this
+While setting up of spark in a clustered enrironment..
+Back ground: I am trying to setup spark cluster with 4 machines.. one as master and 3 are slave nodes..
+
+Steps:
+
+1. Downloaded sbt, scala-2.10.4.tgz and spark-1.4.0.tgz and set path of these software in bashrc file in all four machines.
+
+2. When doing sbt assemly, am getting below exception..
+  UNRESOLVED DEPENDENCIES..
+  spark-network-shuffle_2.10;1.4.0 test
+  
+  Resolution: remove ivy cache then do abt assembly
+  
+    rm -rf ~/.ivy2/cache
+    
+    
+3. After doing that step, it went fine..
+
+

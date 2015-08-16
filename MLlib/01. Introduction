@@ -1,1 +1,8 @@
-Intro
+MLlib is Spark’s scalable machine learning library consisting of common learning algorithms and utilities, including 
+classification, regression, clustering, collaborative filtering, dimensionality reduction, as well as underlying optimization 
+primitives. 
+
+The API is divided into 2 parts:
+
+The original spark.mllib API is the primary API.
+The “Pipelines” spark.ml API is a higher-level API for constructing ML workflows.

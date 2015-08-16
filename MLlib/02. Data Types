@@ -1,0 +1,20 @@
+Spark MLlib has below data types..
+
+  Local vector
+  Labeled point
+  Local matrix
+  Distributed matrix
+    RowMatrix
+    IndexedRowMatrix
+    CoordinateMatrix
+    BlockMatrix
+    
+    
+    
+    MLlib supports local vectors and matrices stored on a single machine, as well as distributed matrices backed by one or more 
+    RDDs. 
+    
+    Local vectors and local matrices are simple data models that serve as public interfaces. The underlying linear algebra 
+    operations are provided by Breeze and jblas. 
+    
+    

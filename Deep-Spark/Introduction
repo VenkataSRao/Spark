@@ -1,1 +1,10 @@
-This is Deep Spark Introduction
+Introduction:
+============
+Deep is a thin integration layer between Apache Spark and several NoSQL datastores. 
+It actually support Apache Cassandra, MongoDB, Elastic Search, Aerospike, HDFS, S3 and any database accessible through JDBC.
+
+Refer below linke for integrate with different no sql databases.
+
+http://stratio.github.io/deep-spark/
+
+
